@@ -1,0 +1,55 @@
+[ 
+  { 
+	"plugin" : "user", 
+	"task" : "create vagrant user", 
+	"data" : 
+	{ "name" : "vagrant", 
+	  "action" : "create",
+      "password" : "vagrant"
+	} 
+  }, 
+  {
+     "plugin" : "directory",
+     "task" : "create directory for key",
+     "data" :
+       {
+         "path" : "/home/vagrant/.ssh",
+         "mode" : "700", 
+		 "action" : "create",
+		 "owner" : "vagrant",
+		 "group" : "vagrant"
+       }
+  },
+  {
+     "plugin" : "get-remote-files",
+     "task" : "get vagrant pub key",
+     "data" :
+       {
+         "target" : "https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub",
+         "destination" : "/home/vagrant/.ssh/authorized_keys"
+       }
+  },
+  {
+     "plugin" : "file",
+     "task" : "make right mode for authorized_keys",
+     "data" :
+       {
+         "mode" : 700,
+         "action" : "create",
+		 "target" : "/home/vagrant/.ssh/authorized_keys",
+		 "owner" : "vagrant",
+		 "group" : "vagrant"
+      }
+  },
+  { 
+	"plugin" : "box-proviser", 
+	"task" : "provise system", 
+	"data" : 
+	{ 
+	  "vagrant" : 
+	  { 
+		"user" : "vagrant" 
+	  } 
+	} 
+  }  
+]

@@ -1,0 +1,75 @@
+{
+    "variables": {
+        "iso_url": "http://mirror.yandex.ru/archlinux/iso/2017.11.01/archlinux-2017.11.01-x86_64.iso",
+        "iso_checksum_url": "http://mirror.yandex.ru/archlinux/iso/2017.11.01/sha1sums.txt",
+        "iso_checksum_type": "sha1",
+        "ssh_timeout": "20m",
+        "headless": "true",
+		"environment_vars": "PATH=/usr/local/bin:/usr/bin:/usr/bin/site_perl"
+    },
+    "builders": [
+        {
+            "type": "virtualbox-iso",
+            "iso_url": "{{ user `iso_url` }}",
+            "iso_checksum_url": "{{ user `iso_checksum_url` }}",
+            "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+            "guest_os_type": "ArchLinux_64",
+            "guest_additions_mode": "disable",
+            "http_directory": "srv",
+            "boot_wait": "5s",
+			"shutdown_command": "sudo systemctl isolate poweroff.target",
+            "boot_command": [
+                "<enter><wait10><wait10>",
+				"echo root:archlinux | chpasswd<enter>",
+                "systemctl start sshd<enter>"
+            ],
+            "disk_size": 20480,
+            "hard_drive_interface": "sata",
+            "ssh_username": "root",
+            "ssh_password": "archlinux",
+            "ssh_timeout": "{{ user `ssh_timeout` }}",
+            "headless" : "{{ user `headless`}}",
+			"vboxmanage": [
+              ["modifyvm", "{{.Name}}", "--memory", "1024"]
+			]
+        }
+    ],
+	"provisioners": [
+        {
+            "type": "shell",
+			"script": "scripts/install_sparrow.sh",
+            "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} {{ .Path }} --with_remount",
+			"environment_vars": "{{ user `environment_vars` }}"
+		},
+        {
+            "type": "shell",
+            "execute_command": "{{ .Vars }} sparrow box run {{ .Path }}",
+			"environment_vars": "{{ user `environment_vars` }}",
+			"script": "boxes/install-base.json"
+        },
+        {
+            "type": "shell",
+            "expect_disconnect": true,
+			"inline": "/usr/bin/reboot",
+			"pause_before": "20s"
+
+        },
+        {
+            "type": "shell",
+			"script": "scripts/install_sparrow.sh",
+			"environment_vars": "{{ user `environment_vars` }}"
+		},
+        {
+            "type": "shell",
+            "execute_command": "{{ .Vars }} sparrow box run {{ .Path }}",
+			"environment_vars": "{{ user `environment_vars` }}",
+			"script": "boxes/provise.json"
+        }
+	],
+	  "post-processors": [
+    {
+      "output": "output/{{.Provider}}-archlinux.box",
+      "type": "vagrant"
+    }
+  ]
+}
