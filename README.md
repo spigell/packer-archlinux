@@ -5,6 +5,24 @@ This template provides some bare bones and scripts for building [Arch Linux](htt
 Supported providers:
  - Virtualbox
 
+Contains:
+  - base packages
+  - gcc
+  - sparrow (and some additional perl modules)
+
+## Specification
+
+  archlinux - x64_86
+  Interface - bios
+  disk - 20G 
+
+  rootpass - root/archlinux
+  
+  For access use vagrant/vagrant or open public key.
+
+  For full information see `boxes/install.json`
+  
+
 # Instructions
 
     $ packer build arch-template.json
