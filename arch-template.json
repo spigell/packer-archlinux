@@ -49,6 +49,10 @@
         },
         {
             "type": "shell",
+			"script": "scripts/hack_ssh.sh"
+        },
+        {
+            "type": "shell",
             "expect_disconnect": true,
 			"inline": "/usr/bin/reboot",
 			"pause_before": "20s"
@@ -60,6 +64,11 @@
 			"environment_vars": "{{ user `environment_vars` }}"
 		},
         {
+            "type": "file",
+			"source": "files/sudo_vagrant",
+			"destination": "/etc/sudoers.d/vagrant"
+		},
+        {
             "type": "shell",
             "execute_command": "{{ .Vars }} sparrow box run {{ .Path }}",
 			"environment_vars": "{{ user `environment_vars` }}",
@@ -68,7 +77,8 @@
 	],
 	  "post-processors": [
     {
-      "output": "output/{{.Provider}}-archlinux.box",
+      "output": "output/archlinux.box-{{.Provider }}",
+	  "compression_level": "9",
       "type": "vagrant"
     }
   ]

@@ -42,14 +42,13 @@
       }
   },
   { 
-	"plugin" : "box-proviser", 
-	"task" : "provise system", 
-	"data" : 
-	{ 
-	  "vagrant" : 
-	  { 
-		"user" : "vagrant" 
-	  } 
-	} 
-  }  
+	 "plugin" : "box-compactor", 
+	 "task" : "clean cache and zero free space", 
+	 "data" : 
+	   { 
+		 "clean_cache" : "true", 
+		 "zero_disk" : "true" 
+	   } 
+  } 
+
 ]
