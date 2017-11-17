@@ -1,5 +1,5 @@
 [ 
-	{ 
+    { 
       "plugin" : "disk-partitioner", 
 	  "task" : "create gpt table via [plg] disk-partitioner", 
       "data" : 
@@ -28,9 +28,9 @@
       "task" : "make boot partition via [plg] disk-partitioner", 
       "data" : 
         { "partition" : { 
-            "fs" : { 
-              "type" : "fat32" 
-            }, 
+           "fs" : {
+              "type" : "fat32"
+            },
               "start" : "16Gib", 
               "end" : "16702Mib", 
               "flags" : "bios_grub", 
@@ -80,10 +80,7 @@
            "rootpw" : "archlinux", 
 		   "mount" :  
              { 
-			   "table" : 
-			   [
-                 "/dev/mapper/vg_main-home:/home/"
-			   ]
+               "table" : [ "/dev/mapper/vg_main-home:/home/" ]
 		     },
            "locales" : 
              { 
@@ -111,8 +108,7 @@
              },
            "packages" : 
              { 
-			   "installed" : 
-               [  "openssh", "sudo", "networkmanager" ] 
+               "installed" : [  "openssh", "sudo", "networkmanager" ] 
              }, 
            "services" : 
              { 

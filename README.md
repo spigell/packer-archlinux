@@ -12,20 +12,32 @@ Contains:
 
 ## Specification
 
-  archlinux - x64_86
+  architecture - x64_86
+
   Interface - bios
+
   disk - 20G 
 
   rootpass - root/archlinux
   
   For access use vagrant/vagrant or open public key.
 
-  For full information see `boxes/install.json`
+  For full information about box see `boxes/install.json`
+
+  *NOTE!* The VirtualBox Guest Additions are not preinstalled! If you need shared folders please install [vbguest](https://github.com/dotless-de/vagrant-vbguest) plugin.
+Or you can use [sshfs](https://github.com/dustymabe/vagrant-sshfs) plugin.
   
 
 # Instructions
 
+For local build you must delete section about uploading to vagrant cloud. After that run:
+
     $ packer build arch-template.json
+
+OR you can use `jq`
+
+    $ jq '.["post-processors"][0] |= map(select(.type != "vagrant-cloud"))' arch-template.json | packer build -
+
 
 ## launch with GUI console
     

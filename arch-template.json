@@ -5,7 +5,9 @@
         "iso_checksum_type": "sha1",
         "ssh_timeout": "20m",
         "headless": "true",
-		"environment_vars": "PATH=/usr/local/bin:/usr/bin:/usr/bin/site_perl"
+		"environment_vars": "PATH=/usr/local/bin:/usr/bin:/usr/bin/site_perl",
+		"version": "2017.11.16",
+		"cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}"
     },
     "builders": [
         {
@@ -76,10 +78,19 @@
         }
 	],
 	  "post-processors": [
+	[
     {
-      "output": "output/archlinux.box-{{.Provider }}",
-	  "compression_level": "9",
-      "type": "vagrant"
-    }
+      "type": "vagrant",
+      "output": "archlinux-{{ .Provider }}.box",
+	  "compression_level": "9"
+    },
+	{
+      "type": "vagrant-cloud",
+      "box_tag": "spigell/archlinux-sparrow",
+	  "access_token": "{{user `cloud_token` }}",
+	  "version": "{{ user `version` }}",
+	  "no_release": true
+	}
+	]
   ]
 }
