@@ -1,7 +1,7 @@
 [ 
     { 
       "plugin" : "disk-partitioner", 
-	  "task" : "create gpt table via [plg] disk-partitioner", 
+      "task" : "create gpt table via [plg] disk-partitioner", 
       "data" : 
         { "table" : { 
             "recreate" : "true", 
@@ -78,10 +78,10 @@
            "hostname" : "archlinux", 
            "timezone" : "Europe/Moscow", 
            "rootpw" : "archlinux", 
-		   "mount" :  
+           "mount" :  
              { 
                "table" : [ "/dev/mapper/vg_main-home:/home/" ]
-		     },
+             },
            "locales" : 
              { 
                "default" : "en_US.UTF-8" 
@@ -114,6 +114,6 @@
              { 
                "enabled" : [ "sshd", "NetworkManager" ] 
              }
-           }
+         }
      }
 ]

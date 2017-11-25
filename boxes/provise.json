@@ -1,12 +1,13 @@
-[ 
-  { 
-	"plugin" : "user", 
-	"task" : "create vagrant user", 
-	"data" : 
-	{ "name" : "vagrant", 
-	  "action" : "create",
-      "password" : "vagrant"
-	} 
+[
+  {
+     "plugin" : "user", 
+     "task" : "create vagrant user", 
+     "data" : 
+       { 
+         "name" : "vagrant",
+         "action" : "create",
+         "password" : "vagrant"
+       } 
   }, 
   {
      "plugin" : "directory",
@@ -15,9 +16,9 @@
        {
          "path" : "/home/vagrant/.ssh",
          "mode" : "700", 
-		 "action" : "create",
-		 "owner" : "vagrant",
-		 "group" : "vagrant"
+         "action" : "create",
+         "owner" : "vagrant",
+         "group" : "vagrant"
        }
   },
   {
@@ -36,19 +37,19 @@
        {
          "mode" : 700,
          "action" : "create",
-		 "target" : "/home/vagrant/.ssh/authorized_keys",
-		 "owner" : "vagrant",
-		 "group" : "vagrant"
+         "target" : "/home/vagrant/.ssh/authorized_keys",
+         "owner" : "vagrant",
+         "group" : "vagrant"
       }
   },
   { 
 	 "plugin" : "box-compactor", 
 	 "task" : "clean cache and zero free space", 
 	 "data" : 
-	   { 
-		 "clean_cache" : "true", 
-		 "zero_disk" : "true" 
-	   } 
-  } 
+	   {
+          "clean_cache" : "true",
+          "zero_disk" : "true"
+           }
+  }
 
 ]

@@ -5,9 +5,9 @@
         "iso_checksum_type": "sha1",
         "ssh_timeout": "20m",
         "headless": "true",
-		"environment_vars": "PATH=/usr/local/bin:/usr/bin:/usr/bin/site_perl",
-		"version": "2017.11.16",
-		"cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}"
+        "environment_vars": "PATH=/usr/local/bin:/usr/bin:/usr/bin/site_perl",
+        "version": "2017.11.16",
+        "cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}"
     },
     "builders": [
         {
@@ -19,11 +19,11 @@
             "guest_additions_mode": "disable",
             "http_directory": "srv",
             "boot_wait": "5s",
-			"shutdown_command": "sudo systemctl isolate poweroff.target",
+            "shutdown_command": "sudo systemctl isolate poweroff.target",
             "boot_command": [
-                "<enter><wait10><wait10>",
-				"echo root:archlinux | chpasswd<enter>",
-                "systemctl start sshd<enter>"
+              "<enter><wait10><wait10>",
+              "echo root:archlinux | chpasswd<enter>",
+              "systemctl start sshd<enter>"
             ],
             "disk_size": 20480,
             "hard_drive_interface": "sata",
@@ -31,66 +31,66 @@
             "ssh_password": "archlinux",
             "ssh_timeout": "{{ user `ssh_timeout` }}",
             "headless" : "{{ user `headless`}}",
-			"vboxmanage": [
+            "vboxmanage": [
               ["modifyvm", "{{.Name}}", "--memory", "1024"]
-			]
+            ]
         }
     ],
-	"provisioners": [
+    "provisioners": [
         {
             "type": "shell",
-			"script": "scripts/install_sparrow.sh",
+            "script": "scripts/install_sparrow.sh",
             "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} {{ .Path }} --with_remount",
-			"environment_vars": "{{ user `environment_vars` }}"
-		},
-        {
-            "type": "shell",
-            "execute_command": "{{ .Vars }} sparrow box run {{ .Path }}",
-			"environment_vars": "{{ user `environment_vars` }}",
-			"script": "boxes/install-base.json"
+            "environment_vars": "{{ user `environment_vars` }}"
         },
         {
             "type": "shell",
-			"script": "scripts/hack_ssh.sh"
+            "execute_command": "{{ .Vars }} sparrow box run {{ .Path }}",
+            "environment_vars": "{{ user `environment_vars` }}",
+            "script": "boxes/install-base.json"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/hack_ssh.sh"
         },
         {
             "type": "shell",
             "expect_disconnect": true,
-			"inline": "/usr/bin/reboot",
-			"pause_before": "20s"
+            "inline": "/usr/bin/reboot",
+            "pause_before": "20s"
 
         },
         {
             "type": "shell",
-			"script": "scripts/install_sparrow.sh",
-			"environment_vars": "{{ user `environment_vars` }}"
-		},
+            "script": "scripts/install_sparrow.sh",
+            "environment_vars": "{{ user `environment_vars` }}"
+        },
         {
             "type": "file",
-			"source": "files/sudo_vagrant",
-			"destination": "/etc/sudoers.d/vagrant"
-		},
+            "source": "files/sudo_vagrant",
+            "destination": "/etc/sudoers.d/vagrant"
+        },
         {
             "type": "shell",
             "execute_command": "{{ .Vars }} sparrow box run {{ .Path }}",
-			"environment_vars": "{{ user `environment_vars` }}",
-			"script": "boxes/provise.json"
+            "environment_vars": "{{ user `environment_vars` }}",
+            "script": "boxes/provise.json"
         }
 	],
-	  "post-processors": [
-	[
+    "post-processors": [
+    [
     {
       "type": "vagrant",
       "output": "archlinux-{{ .Provider }}.box",
-	  "compression_level": "9"
+      "compression_level": "9"
     },
-	{
+      {
       "type": "vagrant-cloud",
       "box_tag": "spigell/archlinux-sparrow",
-	  "access_token": "{{user `cloud_token` }}",
-	  "version": "{{ user `version` }}",
-	  "no_release": true
-	}
-	]
+      "access_token": "{{user `cloud_token` }}",
+      "version": "{{ user `version` }}",
+      "no_release": true
+      }
+    ]
   ]
 }
