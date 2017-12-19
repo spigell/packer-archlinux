@@ -6,8 +6,9 @@ Supported providers:
  - Virtualbox
 
 Contains:
-  - base packages
-  - gcc
+  - base packages (base group)
+  - gcc make guile
+  - git
   - sparrow (and some additional perl modules)
 
 ## Specification
@@ -19,12 +20,15 @@ Contains:
   disk - 20G 
 
   rootpass - root/archlinux
+
+
   
   For access use vagrant/vagrant or open public key.
 
   For full information about box see `boxes/install.json`
 
   *NOTE!* The VirtualBox Guest Additions are not preinstalled! If you need shared folders please install [vbguest](https://github.com/dotless-de/vagrant-vbguest) plugin.
+
 Or you can use [sshfs](https://github.com/dustymabe/vagrant-sshfs) plugin.
   
 
@@ -42,7 +46,6 @@ OR you can use `jq`
 ## launch with GUI console
     
     $ packer build -var 'headless=false' arch-template.json
-
 
 # See also
 [sparrow](https://github.com/melezhik/sparrow) - Used it for scripting
