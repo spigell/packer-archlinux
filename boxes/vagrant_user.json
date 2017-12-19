@@ -41,15 +41,6 @@
          "owner" : "vagrant",
          "group" : "vagrant"
       }
-  },
-  { 
-	 "plugin" : "box-compactor", 
-	 "task" : "clean cache and zero free space", 
-	 "data" : 
-	   {
-          "clean_cache" : "true",
-          "zero_disk" : "true"
-           }
   }
 
 ]

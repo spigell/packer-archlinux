@@ -108,7 +108,7 @@
              },
            "packages" : 
              { 
-               "installed" : [  "openssh", "sudo", "networkmanager" ] 
+               "installed" : [  "openssh", "sudo", "networkmanager", "git" ] 
              }, 
            "services" : 
              { 

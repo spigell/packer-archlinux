@@ -1,12 +1,12 @@
 {
     "variables": {
-        "iso_url": "http://mirror.yandex.ru/archlinux/iso/2017.11.01/archlinux-2017.11.01-x86_64.iso",
-        "iso_checksum_url": "http://mirror.yandex.ru/archlinux/iso/2017.11.01/sha1sums.txt",
+        "iso_url": "https://mirror.yandex.ru/archlinux/iso/latest/archlinux-2017.12.01-x86_64.iso",
+        "iso_checksum_url": "https://mirror.yandex.ru/archlinux/iso/latest/sha1sums.txt",
         "iso_checksum_type": "sha1",
         "ssh_timeout": "20m",
         "headless": "true",
         "environment_vars": "PATH=/usr/local/bin:/usr/bin:/usr/bin/site_perl",
-        "version": "2017.11.16",
+        "version": "2017.12.19",
         "cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}"
     },
     "builders": [
@@ -74,7 +74,13 @@
             "type": "shell",
             "execute_command": "{{ .Vars }} sparrow box run {{ .Path }}",
             "environment_vars": "{{ user `environment_vars` }}",
-            "script": "boxes/provise.json"
+            "script": "boxes/vagrant_user.json"
+        },
+        {
+            "type": "shell",
+            "execute_command": "{{ .Vars }} sparrow box run {{ .Path }}",
+            "environment_vars": "{{ user `environment_vars` }}",
+            "script": "boxes/clean.json"
         }
 	],
     "post-processors": [
