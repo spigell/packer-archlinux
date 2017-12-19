@@ -92,7 +92,7 @@
     },
       {
       "type": "vagrant-cloud",
-      "box_tag": "spigell/archlinux-sparrow",
+      "box_tag": "spigell/archlinux",
       "access_token": "{{user `cloud_token` }}",
       "version": "{{ user `version` }}",
       "no_release": true
