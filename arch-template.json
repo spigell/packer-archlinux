@@ -6,7 +6,7 @@
         "ssh_timeout": "20m",
         "headless": "true",
         "environment_vars": "PATH=/usr/local/bin:/usr/bin:/usr/bin/site_perl",
-        "version": "2017.12.19",
+        "version": "2017.12.21",
         "cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}"
     },
     "builders": [
@@ -22,13 +22,13 @@
             "shutdown_command": "sudo systemctl isolate poweroff.target",
             "boot_command": [
               "<enter><wait10><wait10>",
-              "echo root:archlinux | chpasswd<enter>",
+              "echo root:vagrant | chpasswd<enter>",
               "systemctl start sshd<enter>"
             ],
             "disk_size": 20480,
             "hard_drive_interface": "sata",
             "ssh_username": "root",
-            "ssh_password": "archlinux",
+            "ssh_password": "vagrant",
             "ssh_timeout": "{{ user `ssh_timeout` }}",
             "headless" : "{{ user `headless`}}",
             "vboxmanage": [

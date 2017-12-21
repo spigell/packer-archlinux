@@ -15,8 +15,8 @@
       "task" : "make main partition via [plg] disk-partitioner", 
       "data" : 
         { "partition" : { 
-            "start" : "2Mib", 
-            "end" : "16Gib", 
+            "start" : "2Mib",
+            "end" : "19GB",
             "type" : "primary", 
             "flags" : "lvm", 
             "target" : "/dev/sda" 
@@ -31,8 +31,8 @@
            "fs" : {
               "type" : "fat32"
             },
-              "start" : "16Gib", 
-              "end" : "16702Mib", 
+              "start" : "19GB",
+              "end" : "19102MB",
               "flags" : "bios_grub", 
               "target" : "/dev/sda" 
           } 
@@ -49,24 +49,7 @@
           "partition" : "/dev/sda1", 
           "lv" : "slashroot", 
           "vg" : "vg_main", 
-          "size" : "7GB", 
-          "action" : "create" 
-        } 
-    }, 
-    { 
-      "plugin" : "lvm", 
-      "task" : "create home lv via [plg] lvm", 
-      "data" : 
-        { 
-          "fs" : 
-            { 
-             "type" : "ext4" 
-            }, 
-          "partition" : "/dev/sda1", 
-          "lv" : "home", 
-          "vg" : "vg_main", 
-          "recreate" : "true", 
-          "size" : "5G", 
+          "size" : "17GB", 
           "action" : "create" 
         } 
     }, 
@@ -75,26 +58,22 @@
       "task" : "Install Archlinux via [plg] archlinux-install", 
       "data" : 
          { 
-           "hostname" : "archlinux", 
-           "timezone" : "Europe/Moscow", 
-           "rootpw" : "archlinux", 
-           "mount" :  
-             { 
-               "table" : [ "/dev/mapper/vg_main-home:/home/" ]
-             },
+           "hostname" : "archlinux",
+           "timezone" : "Europe/Moscow",
+           "rootpw" : "vagrant",
            "locales" : 
              { 
-               "default" : "en_US.UTF-8" 
+               "default" : "en_US.UTF-8"
              }, 
            "mirrorlist" : 
              { 
-               "servers" : "http://mirror.yandex.ru/archlinux/$repo/os/$arch" 
+               "servers" : "http://mirror.yandex.ru/archlinux/$repo/os/$arch"
              }, 
            "disk" : 
              { 
                "lvm" : 
                { 
-                 "lv" : "slashroot", 
+                 "lv" : "slashroot",
                  "vg" : "vg_main" 
                } 
              }, 
@@ -108,11 +87,11 @@
              },
            "packages" : 
              { 
-               "installed" : [  "openssh", "sudo", "networkmanager", "git" ] 
+               "installed" : [  "openssh", "sudo", "git" ]
              }, 
            "services" : 
              { 
-               "enabled" : [ "sshd", "NetworkManager" ] 
+               "enabled" : [ "sshd", "dhcpcd" ]
              }
          }
      }

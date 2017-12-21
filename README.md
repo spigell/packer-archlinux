@@ -3,7 +3,7 @@
 This template provides some bare bones and scripts for building [Arch Linux](https://www.archlinux.org/)
 
 Supported providers:
- - Virtualbox
+  - Virtualbox
 
 Contains:
   - base packages (base group)
@@ -17,9 +17,13 @@ Contains:
 
   Interface - bios
 
-  disk - 20G 
+  disk - 20G ( 1xlvm volume - 18GB )
 
-  rootpass - root/archlinux
+  swap - no
+
+  filesystem - ext4
+
+  rootpass - root/vagrant
 
 
   
