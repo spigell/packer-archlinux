@@ -1,12 +1,12 @@
 {
     "variables": {
-        "iso_url": "https://mirror.yandex.ru/archlinux/iso/latest/archlinux-2017.12.01-x86_64.iso",
+        "iso_url": "https://mirror.yandex.ru/archlinux/iso/latest/archlinux-2018.02.01-x86_64.iso",
         "iso_checksum_url": "https://mirror.yandex.ru/archlinux/iso/latest/sha1sums.txt",
         "iso_checksum_type": "sha1",
         "ssh_timeout": "20m",
         "headless": "true",
         "environment_vars": "PATH=/usr/local/bin:/usr/bin:/usr/bin/site_perl",
-        "version": "2017.12.21",
+        "version": "2018.02.01",
         "cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}"
     },
     "builders": [
@@ -37,6 +37,11 @@
         }
     ],
     "provisioners": [
+        {
+            "type": "file",
+            "source": "files/mirrorlist",
+            "destination": "/etc/pacman.d/mirrorlist"
+        },
         {
             "type": "shell",
             "script": "scripts/install_sparrow.sh",

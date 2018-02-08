@@ -1,0 +1,7 @@
+##
+## Arch Linux repository mirrorlist
+## Generated on 2018-02-08
+##
+
+## Russia
+Server = http://mirror.yandex.ru/archlinux/$repo/os/$arch
