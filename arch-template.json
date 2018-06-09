@@ -1,12 +1,12 @@
 {
     "variables": {
-        "iso_url": "https://mirror.yandex.ru/archlinux/iso/latest/archlinux-2018.02.01-x86_64.iso",
+        "iso_url": "https://mirror.yandex.ru/archlinux/iso/latest/archlinux-2018.06.01-x86_64.iso",
         "iso_checksum_url": "https://mirror.yandex.ru/archlinux/iso/latest/sha1sums.txt",
         "iso_checksum_type": "sha1",
         "ssh_timeout": "20m",
         "headless": "true",
         "environment_vars": "PATH=/usr/local/bin:/usr/bin:/usr/bin/site_perl",
-        "version": "2018.02.01",
+        "version": "2018.10.06",
         "cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}"
     },
     "builders": [
@@ -21,7 +21,7 @@
             "boot_wait": "5s",
             "shutdown_command": "sudo systemctl isolate poweroff.target",
             "boot_command": [
-              "<enter><wait10><wait10>",
+              "<enter><wait30>",
               "echo root:vagrant | chpasswd<enter>",
               "systemctl start sshd<enter>"
             ],
