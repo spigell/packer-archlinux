@@ -1,12 +1,12 @@
 {
     "variables": {
-        "iso_url": "https://mirror.yandex.ru/archlinux/iso/latest/archlinux-2018.06.01-x86_64.iso",
+        "iso_url": "https://mirror.yandex.ru/archlinux/iso/latest/archlinux-2018.07.01-x86_64.iso",
         "iso_checksum_url": "https://mirror.yandex.ru/archlinux/iso/latest/sha1sums.txt",
         "iso_checksum_type": "sha1",
         "ssh_timeout": "20m",
         "headless": "true",
         "environment_vars": "PATH=/usr/local/bin:/usr/bin:/usr/bin/site_perl",
-        "version": "2018.06.10",
+        "version": "2018.07.06",
         "cloud_token": "{{env `VAGRANT_CLOUD_TOKEN`}}"
     },
     "builders": [
@@ -68,7 +68,8 @@
         {
             "type": "shell",
             "script": "scripts/install_sparrow.sh",
-            "environment_vars": "{{ user `environment_vars` }}"
+            "environment_vars": "{{ user `environment_vars` }}",
+            "pause_before": "30s"
         },
         {
             "type": "file",
